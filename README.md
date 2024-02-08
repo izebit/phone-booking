@@ -1,6 +1,6 @@
 # Phone Booking
 
-![main-page](https://github.com/izebit/phone-booking/blob/master/demo/main-page.png?raw=true)
+![main-page](https://github.com/izebit/phone-booking/blob/master/pics/main-page.png?raw=true)
 ## Build
 ```shell
 docker build -t phone-booking .
