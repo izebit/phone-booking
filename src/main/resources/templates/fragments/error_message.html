@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="error-block(type, text)"
+     th:if="${type} and ${text}" class="row">
+
+    <div class="col"
+         th:switch="${type}">
+        <div th:case="'INFO'" class="alert alert-success row" role="alert">
+            <div class="col-auto">
+                <i class="bi bi-check-circle" style="font-size: 1.5em"></i>
+            </div>
+            <div class="col-auto my-auto">
+                <span th:text="${text}"></span>
+            </div>
+        </div>
+        <div th:case="'WARNING'" class="alert alert-primary row" role="alert">
+            <div class="col-auto">
+                <i class="bi bi-exclamation-circle" style="font-size: 1.5em"></i>
+            </div>
+            <div class="col-auto my-auto">
+                <span th:text="${text}"></span>
+            </div>
+        </div>
+        <div th:case="'ERROR'" class="alert alert-danger row" role="alert">
+            <div class="col-auto">
+                <i class="bi bi-x-circle" style="font-size: 1.5em"></i>
+            </div>
+            <div class="col-auto my-auto">
+                <span th:text="${text}"></span>
+            </div>
+        </div>
+    </div>
+</div>

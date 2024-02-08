@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/header :: header(title='Phone Booking')}"></head>
+
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-1">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/booking/phones">
+            <i class="bi bi-phone"></i>
+            Phone Booking
+        </a>
+        <div class="d-flex">
+            <div>
+                <a class="navbar-brand" href="/booking/logout">
+                    <span th:text="${username}"/>
+                    <i class="bi bi-person-lines-fill"></i>
+                    logout
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="content">
+        <div class="row my-3"></div>
+
+        <th:block th:if="${message}">
+            <div th:replace="~{fragments/error_message :: error-block( type=${message.type.toString()}, text=${message.text} )}"></div>
+        </th:block>
+
+        <div class="row justify-content-center">
+            <div class="card col-4 m-2" style="width: 18rem;" th:each="phone: ${phones}">
+                <img th:src="@{ '/phones/' + ${phone.id} + '.jpg' }"
+                     class="card-img-top mt-2">
+                <div class="card-body">
+                    <h5 class="card-title text-center" th:text="${phone.title}"></h5>
+
+                    <div class="d-grid gap-2">
+                        <a th:unless="${phone.reservation}"
+                           th:href="@{ '/booking/phones/' + ${phone.id} } + '/book'"
+                           class="btn btn-success">
+                            <i class="bi bi-bookmark-plus"></i>
+                            Book
+                        </a>
+
+                        <a th:if="${phone.reservation} and ${phone.reservation.doesUserOwn}"
+                           th:href="@{ '/booking/phones/' + ${phone.id} } + '/release'"
+                           class="btn btn-primary">
+                            <i class="bi bi-bookmark-x"></i>
+                            Release
+                        </a>
+                    </div>
+
+                    <p th:if="${phone.reservation}" class="card-text mt-3">
+                        <small class="text-muted"
+                               th:utext="'Taken by <b>' + @{ ${phone.reservation.username} + '</b> at '+ ${phone.reservation.date} }">
+                        </small>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush" th:each="detail: ${phone.details}">
+                    <li class="list-group-item" th:utext="@{ '<b>' + ${detail.name} + '</b>: '+ ${detail.value} }"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

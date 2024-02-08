@@ -1,0 +1,28 @@
+spring:
+  thymeleaf.cache: true
+  devtools:
+    restart:
+      enabled: false
+
+    datasource:
+      url: jdbc:h2:mem:testdb
+      driverClassName: org.h2.Driver
+      username: sa
+      password: password
+  jpa:
+    hibernate.ddl-auto: none
+    open-in-view: false
+
+  sql.init:
+    platform: h2
+    mode: always
+    data-locations:
+      - classpath:sql/data.sql
+    schema-locations:
+      - classpath:sql/schema.sql
+      - classpath:org/springframework/security/core/userdetails/jdbc/users.ddl
+
+
+cell-phone-dataset-api:
+  application-id: nDhz83oiuUnoTby12IC4XnuxvrTvH3x5HVs2WYuC
+  rest-api-key: 3uknXVGOVncUYAXiSHD7p1HtU4GK84qrJTwHp8mc
